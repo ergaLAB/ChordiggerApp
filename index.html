@@ -3,31 +3,77 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ChordiggerApp</title>
-    <script src = "script.js"></script>
-    <script src="https://widget.songle.jp/v1/api.js"></script>
+    <title>ChordiggerApp - コード進行検索</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
+    <script src="script.js"></script>
+    <script src="https://widget.songle.jp/v1/api.js"></script>
 </head>
 <body>
-    <h1>ChordiggerApp</h1>
-     <form name = "selectchords">
-     <table>
-        <tr><td><input type="radio" name="chords" value="0" checked>カノン（C - G - Am - Em - F - C - F - G）</input></td></tr>
-        <tr><td><input type="radio" name="chords" value="1" >小室（Am - F - G - C）</input></td></tr>
-        <tr><td><input type="radio" name="chords" value="2" >王道（F - G - Em - Am）</input></td></tr>
-        <tr><td><input type="button" value="GO" onclick="clickbtn()" /></td></tr>
-     </table>
-    </form>
-    <div id="result">ここに運命の一曲が表示されます！</div>
-    <table>
-        <td><a href="https://api.songle.jp/"><img width="200vw" src="https://tutorial.songle.jp/images/logos/powered-by-songle-api.png" alt="powered by Songle API logo"></a></td>
-        <td>
-            <ul style="font-size: 50%;">
+    <div class="container">
+        <header>
+            <h1>🎵 ChordiggerApp</h1>
+            <p class="subtitle">コード進行で運命の一曲を見つけよう</p>
+        </header>
+
+        <main>
+            <section class="card">
+                <h2>コード進行を選択</h2>
+                <form name="selectchords" class="chord-form">
+                    <label class="radio-label">
+                        <input type="radio" name="chords" value="0" checked>
+                        <span class="radio-content">
+                            <span class="chord-name">カノン進行</span>
+                            <span class="chord-progression">C - G - Am - Em - F - C - F - G</span>
+                        </span>
+                    </label>
+                    <label class="radio-label">
+                        <input type="radio" name="chords" value="1">
+                        <span class="radio-content">
+                            <span class="chord-name">小室進行</span>
+                            <span class="chord-progression">Am - F - G - C</span>
+                        </span>
+                    </label>
+                    <label class="radio-label">
+                        <input type="radio" name="chords" value="2">
+                        <span class="radio-content">
+                            <span class="chord-name">王道進行</span>
+                            <span class="chord-progression">F - G - Em - Am</span>
+                        </span>
+                    </label>
+                </form>
+            </section>
+
+            <section class="card">
+                <h2>キー変更</h2>
+                <div class="key-control">
+                    <button id="keyDown" class="key-btn" onclick="changeKey(-1)">−</button>
+                    <span id="currentKeyDisplay" class="key-display">オリジナル</span>
+                    <button id="keyUp" class="key-btn" onclick="changeKey(1)">＋</button>
+                </div>
+                <p class="key-info">現在のコード進行：<span id="currentChords">C - G - Am - Em - F - C - F - G</span></p>
+            </section>
+
+            <section class="card result-card">
+                <button id="searchBtn" class="search-btn" onclick="clickbtn()">🎸 曲を探す</button>
+                <div id="result" class="result-area">
+                    <p>ここに運命の一曲が表示されます！</p>
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <a href="https://api.songle.jp/" target="_blank" rel="noopener">
+                <img width="200vw" src="https://tutorial.songle.jp/images/logos/powered-by-songle-api.png" alt="powered by Songle API logo">
+            </a>
+            <ul class="disclaimer">
                 <li>本サービスは、国立研究開発法人産業技術総合研究所が提供する Songle API を利用して開発・動作しています。</li>
                 <li>本サービスは非営利の個人による開発物であり、国立研究開発法人産業技術総合研究所との提携・後援・公認関係にあるものではありません。</li>
-                <li>本サービスは非商用目的で提供されています。Songle API の仕様変更やサービス停止等に伴う損害について、当方および産総研は一切の責任を負いません。</li>
+                <li>本サービスは非商用目的で提供されています。Songle API の仕様変更やサービス停止等に伴う損害について、当方および産総研は一切の責任を負いません。</li>
             </ul>
-        </td>
-    </table>
+        </footer>
+    </div>
 </body>
 </html>
