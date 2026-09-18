@@ -151,8 +151,27 @@ function callAPI(query, maxpagenum) {
 // 結果を表示する関数
 function drawresult(url, title) {
   const resultElement = document.getElementById('result');
+  
+  // 既存の Songle Widget を削除
+  const existingWidget = document.getElementById('songle-widget');
+  if (existingWidget) {
+    existingWidget.remove();
+  }
+  
   if (url) {
-    resultElement.innerHTML = `<a href="${url}" target="_blank" rel="noopener">${title}</a>`;
+    // div を使った Songle Widget の埋め込み
+    const widgetDiv = document.createElement('div');
+    widgetDiv.setAttribute('data-api', 'songle-widget-extra-module');
+    widgetDiv.setAttribute('data-url', url);
+    widgetDiv.id = 'songle-widget';
+    
+    resultElement.innerHTML = '';
+    resultElement.appendChild(widgetDiv);
+    
+    // ウィジェットのスクリプトを再読み込み（既に読み込まれていても問題なし）
+    const script = document.createElement('script');
+    script.src = 'https://widget.songle.jp/v1/widgets.js';
+    resultElement.appendChild(script);
   } else {
     resultElement.innerHTML = `<p style="color: #666;">${title}</p>`;
   }
